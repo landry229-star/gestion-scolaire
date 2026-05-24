@@ -12,11 +12,10 @@ WORKDIR /app
 COPY . .
 
 RUN composer install --ignore-platform-reqs --no-dev --optimize-autoloader
-
 RUN chmod -R 777 storage bootstrap/cache
 
-EXPOSE 10000
+EXPOSE 8000
 
 CMD php artisan config:cache && \
     php artisan migrate --force && \
-    php artisan serve --host=0.0.0.0 --port=${PORT:-10000}
+    php artisan serve --host=0.0.0.0 --port=8000
